@@ -7,9 +7,9 @@ function time_format(timestamp) {
   let Y = date.getFullYear() + '-';
   let M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
   let D = date.getDate() + ' ';
-  let h = date.getHours() + ':';
-  let m = date.getMinutes() + ':';
-  let s = date.getSeconds(); 
+  let h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+  let m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+  let s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds(); 
   return Y+M+D+h+m+s;
 }
 
@@ -82,7 +82,7 @@ async function load_my_follows() {
       for (var i = 0; i < tmp_posts.length; i++) {
         let tmp_p = document.createElement("p");
         let time = time_format(tmp_posts[i].time.toString().substring(0, 13));
-        let tmp = `   *****   \r\nTime: ${time},\r\nAuthor Name: ${author_name},\r\nAuthor Canister ID: ${canister_id},\r\nMessage: ${tmp_posts[i].message}`;
+        let tmp = `   *****   \r\nTime: ${time},\r\nAuthor Name: ${author_name},\r\nAuthor Canister ID: ${canister_id},\r\nMessage: ${tmp_posts[i].text}`;
         tmp_p.innerText = tmp;
         document.getElementById("chosen_follow_posts").append(tmp_p);
       }
@@ -100,8 +100,8 @@ async function load_my_timeline() {
   for (var i = 0; i < timeline.length; i++) {
     let timeline_item = document.createElement("p")
     let time = time_format(timeline[i].time.toString().substring(0, 13));
-    let tmp_name = await createActor(timeline[i].author).get_name()
-    let tmp = `   *****   \r\nTime: ${time},\r\nAuthor Name: ${tmp_name},\r\nAuthor Canister ID: ${timeline[i].author},\r\nMessage: ${timeline[i].message}`;
+    // let tmp_name = await createActor(timeline[i].author).get_name()
+    let tmp = `   *****   \r\nTime: ${time},\r\nAuthor Name: ${timeline[i].author},\r\nMessage: ${timeline[i].text}`;
     timeline_item.innerText = tmp
     timeline_section.append(timeline_item)
   }
@@ -146,10 +146,10 @@ async function load_posts() {
   num_posts = posts.length;
   for (var i = 0; i < posts.length; i++) {
     let post_item = document.createElement("p")
-    if (posts[i].message.trim().length == 0) {
+    if (posts[i].text.trim().length == 0) {
       continue;
     }
-    post_item.innerText = posts[i].message
+    post_item.innerText = posts[i].text
     posts_section.append(post_item)
   }
 }
@@ -160,10 +160,10 @@ function load_posts_by_id(canister_id) {
   let posts = createActor(canister_id).posts;
   for (var i = 0; i < posts.length; i++) {
     let post_item = document.createElement("p")
-    if (posts[i].message.trim().length == 0) {
+    if (posts[i].text.trim().length == 0) {
       continue;
     }
-    post_item.innerText = posts[i].message
+    post_item.innerText = posts[i].text
     posts_section.append(post_item)
   }
 }

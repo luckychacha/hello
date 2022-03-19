@@ -2,7 +2,7 @@ type Time = int;
 type Message = 
  record {
    author: text;
-   message: text;
+   "text": text;
    time: Time;
  };
 service : {

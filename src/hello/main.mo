@@ -7,7 +7,7 @@ actor Self {
     public type Message = {
         author: Text;
         time: Time.Time;
-        message: Text;
+        text: Text;
     };
 
     public type Microblog = actor {
@@ -45,7 +45,7 @@ actor Self {
         assert(otp == "yyds");
         let message = {
             author = Principal.toText(Principal.fromActor(Self));
-            message = text;
+            text = text;
             time = Time.now();
         };
         messages := List.push(message, messages);
