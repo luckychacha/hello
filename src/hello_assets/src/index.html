@@ -3,20 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>hello</title>
+    <title>MicroBlog</title>
     <base href="/" />
     <link rel="icon" href="favicon.ico" />
-    <link type="text/css" rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
   </head>
   <body>
+    <header><h1>MicroBlog</h1></header>
     <main>
-      <img src="logo.png" alt="DFINITY logo" />
-      <form action="#">
-        <label for="name">Enter your name: &nbsp;</label>
-        <input id="name" alt="Name" type="text" />
-        <button type="submit">Click Me!</button>
-      </form>
-      <section id="greeting"></section>
+      <div class="author_name">
+        <div>
+          Current name is:
+          <span>
+            <section id="current_author_name"></section>
+          </span>
+        </div>
+        <label for="author_name">What's your name?</label>
+        <input id="author_name" />
+        <button id="submit_author_name">Submit Name</button>
+      </div>
+      <div class="post_part">
+        <div>
+          <label for="message">What do you want to post?</label>
+          <textarea id="message" cols="30" rows="10"></textarea>
+        </div>
+        <label for="otp">OTP:
+          <input id="otp" />
+        </label>
+        <button id="post">Post</button>
+        <div>
+          <span id="error"></span>
+        </div>
+      </div>
+      <div class="my_posts">
+        My Posts
+        <section id="posts"></section>
+      </div>
+
+      <div class="follows_part">
+        <button id="refresh_timeline">Refresh my timeline</button>
+        My Follows TimeLine: <section id="timeline"></section>
+
+        <button id="refresh_my_folows">Refresh my follows</button>
+        My Follows:<section id="follows"></section>
+        Chosen people's Posts:<section id="chosen_follow_posts"></section>
+      </div>
     </main>
   </body>
 </html>
